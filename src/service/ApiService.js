@@ -6,7 +6,7 @@ export function call(api, method, request) {
   });
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
   if (accessToken) {
-    this.headers.append("Authorization", "Bearer " + accessToken);
+    headers.append("Authorization", "Bearer " + accessToken);
   }
   let options = {
     headers: headers,
@@ -31,12 +31,14 @@ export function call(api, method, request) {
       console.log(error.status);
       console.log("Oops!");
       if (error.status === 403) {
+        console.log("로그인 화면 전");
         window.location.href = "/login";
+        console.log("로그인 화면 후");
       }
       return Promise.reject(error);
     });
 }
-export function SignalWifiOffOutlined(userDTO) {
+export function signin(userDTO) {
   return call("/auth/signin", "POST", userDTO).then((response) => {
     if (response.token) {
       localStorage.setItem("ACCESS_TOKEN", response.token);

@@ -30,7 +30,7 @@ class Login extends React.Component {
         </Grid>
         <form noValidate onSubmit={this.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xc={12}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -41,17 +41,17 @@ class Login extends React.Component {
                 autoComplete="email"
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              variant="outlined"
-              required
-              fullWidth
-              id="password"
-              label="패스워드"
-              name="password"
-              autoComplete="password"
-            />
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="password"
+                label="패스워드"
+                name="password"
+                autoComplete="password"
+              />
+            </Grid>
             <Grid item xs={12}>
               <Button
                 type="submit"

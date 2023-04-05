@@ -80,7 +80,7 @@ class App extends React.Component {
       <div>
         {navigationBar}
         <Container maxWidth="md">
-          <AddTodo add={this.ad} />
+          <AddTodo add={this.add} />
           <div className="TodoList">{todoItems}</div>
         </Container>
       </div>
