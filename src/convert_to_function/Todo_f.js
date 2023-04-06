@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import {
   ListItem,
   ListItemText,
@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 import { call, signout } from "./ApiService_f";
+import { StarRate } from "@material-ui/icons";
 function Todo_f(props) {
   // const [state, setState] = useState({ item: props.item, readOnly: true });
   const [item, setItem] = useState(props.item);
@@ -23,34 +24,48 @@ function Todo_f(props) {
   const offReadOnlyMode = () => {
     console.log("offReadOnlyMode called");
     // console.log("Event!", this.state.readOnly);
-    setReadOnly(false, () => {
-      console.log("ReadOnly?", readOnly);
-    });
+    setReadOnly(false);
   };
   const enterKeyEventHandler = (e) => {
+    // console.log(readOnly);
     console.log("enterKeyEventHandler");
     if (e.key === "Enter") {
       setReadOnly(true);
       update(item);
     }
   };
+  // useEffect(
+  //   (e) => {
+  //     console.log("editEventHandler");
+  //     const thisItem = item;
+  //     console.log(thisItem);
+  //     thisItem.title = e.target.value;
+  //   },
+  //   [item]
+  // );
+  useEffect(() => {
+    console.log(item);
+  }, [item]);
   const editEventHandler = (e) => {
     console.log("editEventHandler");
-    const thisItem = item;
-    thisItem.title = e.target.value;
-    setItem(thisItem);
+    // const thisItem = item;
+    // console.log(thisItem);
+    // thisItem.title = e.target.value;
+    // console.log(e.target.value);
+
+    setItem((prev) => ({ ...prev, title: e.target.value }));
   };
   const checkboxEventHandler = (e) => {
     console.log("checkboxEventHandler");
-    console.log(item);
+
     const thisItem = item;
-    console.log(thisItem);
+
     thisItem.done = thisItem.done ? false : true;
     // this.setState({ item: thisItem });
     setReadOnly(true);
-    console.log(item);
+
     update(item);
-    console.log(item);
+
     console.log("check box event call");
     console.log(item);
     // console.log("업데이트 후");

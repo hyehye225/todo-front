@@ -1,56 +1,117 @@
-import { React, useState } from "react";
+// import { React, useState } from "react";
+// import { TextField, Paper, Button, Grid } from "@material-ui/core";
+// import { PersonalVideo } from "@material-ui/icons";
+
+// function AddTodo_f(props) {
+//   // const [item, setItem] = useState("");
+//   // const [title, setTitle] = useState("");
+//   const [item, setItem] = useState({ title: "" });
+//   const add = props.add;
+
+//   const onInputChange = (e) => {
+//     console.log(item);
+//     console.log("onInputChange");
+//     const thisItem = item;
+//     thisItem.title = e.target.value;
+//     console.log(thisItem.title);
+//     setItem(thisItem);
+//     console.log(item);
+//     // console.log(thisItem);
+//   };
+//   const onButtonClick = () => {
+//     console.log("onButtonClick");
+//     add(item);
+//     // setItem((prev) => ({ ...prev, title: "" }));
+//     setItem({ title: "" });
+//   };
+//   const enterKeyEventHandler = (e) => {
+//     console.log("enterKeyEventHandler");
+//     if (e.key === "Enter") {
+//       onButtonClick();
+//     }
+//   };
+
+//   return (
+//     <Paper style={{ margine: 16, padding: 16 }}>
+//       <Grid container>
+//         <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
+//           <TextField
+//             placeholder="Add Todo here"
+//             fullWidth
+//             onChange={onInputChange}
+//             value={item.title}
+//             onKeyPress={enterKeyEventHandler}
+//           />
+//         </Grid>
+//         <Grid xs={1} mid={1} item>
+//           <Button
+//             fullWidth
+//             color="secondary"
+//             variant="outlined"
+//             onClick={onButtonClick}
+//           >
+//             +
+//           </Button>
+//         </Grid>
+//       </Grid>
+//     </Paper>
+//   );
+// }
+
+// export default AddTodo_f;
+import React from "react";
 import { TextField, Paper, Button, Grid } from "@material-ui/core";
 
-function AddTodo_f(props) {
-  // const [item, setItem] = useState("");
-  // const [title, setTitle] = useState("");
-  const [item, setItem] = useState({ title: "" });
-  const add = props.add;
-
-  const onInputChange = (e) => {
+class AddTodo_f extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { item: { title: "" } };
+    this.add = props.add;
+  }
+  onInputChange = (e) => {
     console.log("onInputChange");
-    const thisItem = item;
+    const thisItem = this.state.item;
     thisItem.title = e.target.value;
-    setItem(thisItem);
+    this.setState({ item: thisItem });
     // console.log(thisItem);
   };
-  const onButtonClick = () => {
+  onButtonClick = () => {
     console.log("onButtonClick");
-    add(item);
-    setItem({ title: "" });
+    this.add(this.state.item);
+    this.setState({ item: { title: "" } });
   };
-  const enterKeyEventHandler = (e) => {
+  enterKeyEventHandler = (e) => {
     console.log("enterKeyEventHandler");
     if (e.key === "Enter") {
-      onButtonClick();
+      this.onButtonClick();
     }
   };
-
-  return (
-    <Paper style={{ margine: 16, padding: 16 }}>
-      <Grid container>
-        <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
-          <TextField
-            placeholder="Add Todo here"
-            fullWidth
-            onChange={onInputChange}
-            value={item.title}
-            onKeyPress={enterKeyEventHandler}
-          />
+  render() {
+    return (
+      <Paper style={{ margine: 16, padding: 16 }}>
+        <Grid container>
+          <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
+            <TextField
+              placeholder="Add Todo here"
+              fullWidth
+              onChange={this.onInputChange}
+              value={this.state.item.title}
+              onKeyPress={this.enterKeyEventHandler}
+            />
+          </Grid>
+          <Grid xs={1} mid={1} item>
+            <Button
+              fullWidth
+              color="secondary"
+              variant="outlined"
+              onClick={this.onButtonClick}
+            >
+              +
+            </Button>
+          </Grid>
         </Grid>
-        <Grid xs={1} mid={1} item>
-          <Button
-            fullWidth
-            color="secondary"
-            variant="outlined"
-            onClick={onButtonClick}
-          >
-            +
-          </Button>
-        </Grid>
-      </Grid>
-    </Paper>
-  );
+      </Paper>
+    );
+  }
 }
-
 export default AddTodo_f;

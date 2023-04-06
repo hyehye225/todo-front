@@ -47,7 +47,7 @@ function App_f(props) {
     <Paper style={{ margin: 16 }}>
       <List>
         {items.map((item, idx) => (
-          <Todo item={item} key={item.id} delete={deletee} update={update} />
+          <Todo item={item} key={item.id} deletee={deletee} update={update} />
         ))}
       </List>
     </Paper>
