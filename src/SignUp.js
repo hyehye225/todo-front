@@ -83,7 +83,7 @@ class SignUp extends React.Component {
               </Button>
             </Grid>
           </Grid>
-          <Grid container justify="flex-end">
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
                 <Grid item>이미 계정이 있습니까? 로그인 하세요.</Grid>

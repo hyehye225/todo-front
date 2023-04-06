@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
+import { call, signout } from "./service/ApiService.js";
 class Todo extends React.Component {
   constructor(props) {
     super(props);
@@ -16,33 +17,41 @@ class Todo extends React.Component {
     this.update = props.update;
   }
   deleteEventHandler = () => {
+    console.log("deleteEventHandler called");
     this.delete(this.state.item);
   };
   offReadOnlyMode = () => {
-    console.log("Event!", this.state.readOnly);
+    console.log("offReadOnlyMode called");
+    // console.log("Event!", this.state.readOnly);
     this.setState({ readOnly: false }, () => {
       console.log("ReadOnly?", this.state.readOnly);
     });
   };
   enterKeyEventHandler = (e) => {
+    console.log("enterKeyEventHandler");
     if (e.key === "Enter") {
       this.setState({ readOnly: true });
       this.update(this.state.item);
     }
   };
   editEventHandler = (e) => {
+    console.log("editEventHandler");
     const thisItem = this.state.item;
     thisItem.title = e.target.value;
     this.setState({ item: thisItem });
   };
   checkboxEventHandler = (e) => {
-    console.log("check box event call");
+    console.log("checkboxEventHandler");
     const thisItem = this.state.item;
     thisItem.done = thisItem.done ? false : true;
     // this.setState({ item: thisItem });
     this.setState({ readOnly: true });
     this.update(this.state.item);
+    console.log("check box event call");
+
+    // console.log("업데이트 후");
   };
+
   render() {
     const item = this.state.item;
     return (
