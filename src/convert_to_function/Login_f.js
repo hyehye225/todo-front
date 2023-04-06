@@ -1,5 +1,5 @@
 import React from "react";
-import { signin } from "./service/ApiService";
+import { signin } from "./ApiService_f";
 import {
   Button,
   TextField,
@@ -8,9 +8,7 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-function Login(props) {
-  super(props);
-
+function Login_f(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -26,7 +24,7 @@ function Login(props) {
           로그인
         </Typography>{" "}
       </Grid>
-      <form noValidate onSubmit={this.handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -64,4 +62,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default Login_f;

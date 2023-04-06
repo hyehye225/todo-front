@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { signup } from "./service/ApiService";
+import { signup } from "./ApiService_f";
 import {
   Button,
   TextField,
@@ -8,9 +8,7 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-function SignUp(props) {
-  super(props);
-
+function SignUp_f(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -26,7 +24,7 @@ function SignUp(props) {
 
   return (
     <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
-      <form noValidate onSubmit={this.handleSubmit}>
+      <form noValidate onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography component="h1" variant="h5">
@@ -88,4 +86,4 @@ function SignUp(props) {
   );
 }
 
-export default SignUp;
+export default SignUp_f;

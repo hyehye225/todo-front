@@ -1,8 +1,8 @@
 import { React, useState } from "react";
 import "./index.css";
 import App from "./App";
-import Login from "./Login";
-import SignUp from "./SignUp";
+import Login from "./Login_f";
+import SignUp from "./SignUp_f";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";

@@ -1,24 +1,23 @@
 import { React, useState } from "react";
 import { TextField, Paper, Button, Grid } from "@material-ui/core";
 
-function AddTodo(props) {
-  super(props);
+function AddTodo_f(props) {
   // const [item, setItem] = useState("");
   // const [title, setTitle] = useState("");
-  const [state, setState] = useState({ item: { title: "" } });
+  const [item, setItem] = useState({ title: "" });
   const add = props.add;
 
   const onInputChange = (e) => {
     console.log("onInputChange");
-    const thisItem = state.item;
+    const thisItem = item;
     thisItem.title = e.target.value;
-    setState({ item: thisItem });
+    setItem(thisItem);
     // console.log(thisItem);
   };
   const onButtonClick = () => {
     console.log("onButtonClick");
-    add(state.item);
-    setState({ item: { title: "" } });
+    add(item);
+    setItem({ title: "" });
   };
   const enterKeyEventHandler = (e) => {
     console.log("enterKeyEventHandler");
@@ -35,7 +34,7 @@ function AddTodo(props) {
             placeholder="Add Todo here"
             fullWidth
             onChange={onInputChange}
-            value={state.title}
+            value={item.title}
             onKeyPress={enterKeyEventHandler}
           />
         </Grid>
@@ -54,4 +53,4 @@ function AddTodo(props) {
   );
 }
 
-export default AddTodo;
+export default AddTodo_f;

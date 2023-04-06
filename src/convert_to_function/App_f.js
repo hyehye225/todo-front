@@ -1,8 +1,8 @@
 import "./App.css";
 import { React, useState, useEffect } from "react";
-import Hello from "./Hello";
-import Todo from "./Todo";
-import AddTodo from "./AddTodo";
+
+import Todo from "./Todo_f";
+import AddTodo from "./AddTodo_f";
 import {
   Paper,
   List,
@@ -14,43 +14,39 @@ import {
   Typography,
 } from "@material-ui/core";
 import "./App.css";
-import { call, signout } from "./service/ApiService.js";
-function App(props) {
-  super(props);
-  const [state, setState] = useState({
-    items: [],
-    loading: true,
-  });
-
+import { call, signout } from "./ApiService_f";
+function App_f(props) {
+  // const [state, setState] = useState({
+  //   items: [],
+  //   loading: true,
+  // });
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     console.log("componentDidMount 실행됨");
-    call("/todo", "GET", null).then((response) =>
-      this.setState({ items: response.data, loading: false })
+    call("/todo", "GET", null).then(
+      (response) => setItems(response.data),
+      setLoading(false)
     );
   }, []);
+
   const add = (item) => {
     console.log("add", item);
-    call("/todo", "POST", item).then((response) =>
-      this.setState({ items: response.data })
-    );
+    call("/todo", "POST", item).then((response) => setItems(response.data));
   };
   const deletee = (item) => {
     console.log("delete", item);
-    call("/todo", "DELETE", item).then((response) =>
-      this.setState({ items: response.data })
-    );
+    call("/todo", "DELETE", item).then((response) => setItems(response.data));
   };
   const update = (item) => {
     console.log("update", item);
-    call("/todo", "PUT", item).then((response) =>
-      this.setState({ items: response.data })
-    );
+    call("/todo", "PUT", item).then((response) => setItems(response.data));
   };
 
-  var todoItems = state.items.length > 0 && (
+  var todoItems = items.length > 0 && (
     <Paper style={{ margin: 16 }}>
       <List>
-        {state.items.map((item, idx) => (
+        {items.map((item, idx) => (
           <Todo item={item} key={item.id} delete={deletee} update={update} />
         ))}
       </List>
@@ -85,7 +81,7 @@ function App(props) {
   );
   var loadingPage = <h1>로딩중..</h1>;
   var content = loadingPage;
-  if (!state.loading) {
+  if (!loading) {
     content = todoListPage;
   }
   return <div className="App">{content}</div>;
@@ -101,4 +97,4 @@ function App(props) {
   // );
 }
 
-export default App;
+export default App_f;
