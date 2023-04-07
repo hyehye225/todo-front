@@ -14,6 +14,7 @@ function Todo_f(props) {
   // const [state, setState] = useState({ item: props.item, readOnly: true });
   const [item, setItem] = useState(props.item);
   const [readOnly, setReadOnly] = useState(true);
+  const [checked, setChecked] = useState([]);
   const deletee = props.deletee;
   const update = props.update;
 
@@ -68,6 +69,8 @@ function Todo_f(props) {
 
     console.log("check box event call");
     console.log(item);
+    setChecked((previousState) => [...previousState, item.title]);
+    console.log(checked);
     // console.log("업데이트 후");
   };
 

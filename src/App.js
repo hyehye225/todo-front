@@ -4,6 +4,15 @@ import Hello from "./Hello";
 import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 import {
+  ListItem,
+  ListItemText,
+  InputBase,
+  Checkbox,
+  ListItemSecondaryAction,
+  IconButton,
+} from "@material-ui/core";
+import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
+import {
   Paper,
   List,
   Container,
@@ -23,7 +32,20 @@ class App extends React.Component {
       loading: true,
     };
   }
-
+  deleteEventHandler = () => {
+    console.log("deleteEventHandler called");
+    const thisItems = this.state.items;
+    console.log(thisItems);
+    // this.delete(this.state.item);
+    thisItems.map((item) => {
+      if (item.done) {
+        console.log("delete", item);
+        call("/todo", "DELETE", item).then((response) =>
+          this.setState({ items: response.data })
+        );
+      }
+    });
+  };
   componentDidMount() {
     console.log("componentDidMount 실행됨");
     call("/todo", "GET", null).then((response) =>
@@ -42,6 +64,12 @@ class App extends React.Component {
       this.setState({ items: response.data })
     );
   };
+  // deleteAll = (item) => {
+  //   console.log("delete all", item);
+  //   call("/todo", "DELETE ", item).then((response) =>
+  //     this.setState({ items: response.data })
+  //   );
+  // };
   update = (item) => {
     console.log("update", item);
     call("/todo", "PUT", item).then((response) =>
@@ -85,10 +113,26 @@ class App extends React.Component {
     var todoListPage = (
       <div>
         {navigationBar}
-        <Container maxWidth="md">
-          <AddTodo add={this.add} />
-          <div className="TodoList">{todoItems}</div>
-        </Container>
+        <>
+          <Container maxWidth="md">
+            <AddTodo add={this.add} />
+            <div className="TodoList">{todoItems}</div>
+          </Container>
+          <IconButton
+            aria-label="Delete"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              margin: "auto",
+            }}
+            onClick={this.deleteEventHandler}
+          >
+            Delete Completed Item
+            <DeleteOutlined />
+          </IconButton>
+        </>
       </div>
     );
     var loadingPage = <h1>로딩중..</h1>;
