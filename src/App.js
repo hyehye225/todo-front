@@ -161,7 +161,7 @@ class App extends React.Component {
             <Grid item>
               <Button color="inherit" onClick={this.profile}>
                 {" "}
-                회원정보 수정
+                회원정보 관리
               </Button>
               <Button color="inherit" onClick={signout}>
                 {" "}

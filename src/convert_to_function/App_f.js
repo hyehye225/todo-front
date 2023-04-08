@@ -24,7 +24,9 @@ import {
 } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 import "./App.css";
-import { call, signout } from "./ApiService_f";
+import { call, RetrieveUser, signout } from "./ApiService_f";
+import User from "./User_f.js";
+import { render } from "@testing-library/react";
 function App_f(props) {
   // const [state, setState] = useState({
   //   items: [],
@@ -34,6 +36,7 @@ function App_f(props) {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [showProfile, setShowProfile] = useState(false);
   // const forceUpdate = React.useCallback(() => updateState({}), []);
   useEffect(() => {
     console.log("componentDidMount 실행됨");
@@ -78,6 +81,10 @@ function App_f(props) {
     currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
     console.log(currentItems);
     return currentItems;
+  };
+  const profile = () => {
+    setShowProfile(true);
+    // console.log(this.state.)
   };
   const deleteEventHandler = () => {
     console.log("deleteEventHandler called");
@@ -159,6 +166,10 @@ function App_f(props) {
             <Typography variant="h6">오늘의 할일</Typography>
           </Grid>
           <Grid item>
+            <Button color="inherit" onClick={profile}>
+              {" "}
+              회원정보 수정
+            </Button>
             <Button color="inherit" onClick={signout}>
               {" "}
               logout
@@ -219,10 +230,21 @@ function App_f(props) {
       </IconButton>
     </div>
   );
+  var userPage = (
+    <div>
+      {navigationBar}
+      <Container maxWidth="md">
+        <User />
+      </Container>
+    </div>
+  );
   var loadingPage = <h1>로딩중..</h1>;
   var content = loadingPage;
   if (!loading) {
     content = todoListPage;
+  }
+  if (!loading && showProfile) {
+    content = userPage;
   }
   return <div className="App">{content}</div>;
 

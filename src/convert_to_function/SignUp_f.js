@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { signup } from "./ApiService_f";
+import { RetrieveUser, signup } from "./ApiService_f";
 import {
   Button,
   TextField,
@@ -9,12 +9,15 @@ import {
   Typography,
 } from "@material-ui/core";
 function SignUp_f(props) {
+  // const [user, setUser] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const username = data.get("username");
     const email = data.get("email");
     const password = data.get("password");
+    // setUser({ username: username, email: email, password: password });
+    // RetrieveUser({ email, username, password });
     signup({ email: email, username: username, password: password }).then(
       (response) => {
         window.location.href = "/login";

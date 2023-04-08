@@ -1,5 +1,5 @@
-import React from "react";
-import { signin } from "./ApiService_f";
+import React, { useState } from "react";
+// import { signin } from "./ApiService_f";
 import {
   Button,
   TextField,
@@ -8,13 +8,18 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
+import { signin } from "./ApiService_f";
+import User_f, { SaveEmail } from "./User_f";
 function Login_f(props) {
+  const [user, setUser] = useState({});
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const email = data.get("email");
     const password = data.get("password");
+
     signin({ email: email, password: password });
+    // SaveEmail(email);
   };
 
   return (
