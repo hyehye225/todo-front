@@ -52,8 +52,13 @@ function User_f(props) {
     console.log("onButtonClick");
     // RetrieveUser(user);
     // setItem((prev) => ({ ...prev, title: "" }));
-    setUser((prev) => ({ id: "", password: "", username: "" }));
-    // updateuserinfo(user);
+    setUser((prev) => ({
+      id: user.id,
+      password: user.password,
+      username: user.username,
+      email: user.email,
+    }));
+    updateuserinfo(user);
     console.log(user);
   };
   const enterKeyEventHandler = (e) => {
@@ -78,6 +83,7 @@ function User_f(props) {
           password: response.password,
           id: response.id,
         });
+        console.log(user);
         // return response;
       } else {
         console.log("오류 발생");
@@ -86,7 +92,16 @@ function User_f(props) {
   };
   return (
     <Paper style={{ margine: 16, padding: 16 }}>
-      <Grid container>
+      <Grid
+        container
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center",
+          margin: "auto",
+        }}
+      >
         <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
           <TextField
             label={"사용자 이름: " + user.username}
@@ -96,14 +111,14 @@ function User_f(props) {
             // value={user.username}
             onKeyPress={enterKeyEventHandler}
           />
-          <TextField
+          {/* <TextField
             label={"아이디: " + user.id}
             fullWidth
             id="outlined-required"
             onChange={onIdChange}
             // value={user.id}
             onKeyPress={enterKeyEventHandler}
-          />
+          /> */}
           <TextField
             label={"비밀번호: " + user.password}
             fullWidth
@@ -112,6 +127,17 @@ function User_f(props) {
             // value={user.password}
             onKeyPress={enterKeyEventHandler}
           />
+
+          {/* <Grid xs={1} mid={1} item>
+          <Button
+            fullWidth
+            color="secondary"
+            variant="outlined"
+            onClick={onButtonClick}
+          >
+            수정
+          </Button>
+        </Grid> */}
         </Grid>
         <Grid xs={1} mid={1} item>
           <Button

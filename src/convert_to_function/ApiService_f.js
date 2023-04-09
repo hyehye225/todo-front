@@ -15,7 +15,7 @@ export function call(api, method, request) {
     url: API_BASE_URL + api,
     method: method,
   };
-
+  console.log(options);
   if (request) {
     options.body = JSON.stringify(request);
   }
@@ -88,6 +88,7 @@ export function callGet(api, method, query) {
       return Promise.reject(error);
     });
 }
+
 export function signin(userDTO) {
   // const [user,setUser]=useState({});
   return call("/auth/signin", "POST", userDTO).then((response) => {
@@ -101,14 +102,28 @@ export function signin(userDTO) {
 }
 export function updateuserinfo(userDTO) {
   // const [user,setUser]=useState({});
-  return call("/auth/update", "POST", userDTO).then((response) => {
-    if (response.token) {
-      // localStorage.setItem("ACCESS_TOKEN", response.token);
-      // localStorage.setItem("email", response.email);
-      window.location.href = "/";
-      // SaveMail(userDTO.email);
-    }
-  });
+  console.log(userDTO);
+  return call("/auth/update", "PUT", userDTO)
+    .then((response) => {
+      if (response.id) {
+        console.log("user updated");
+        // localStorage.setItem("ACCESS_TOKEN", response.token);
+        // localStorage.setItem("email", response.email);
+        // window.location.href = "/";
+        // SaveMail(userDTO.email);
+      }
+    })
+    .catch((error) => {
+      console.log("Oops!");
+      console.log(error.status);
+      console.log("Oops!");
+      // if (error.status === 403) {
+      //   console.log("로그인 화면 전");
+      //   window.location.href = "/login";
+      //   console.log("로그인 화면 후");
+      // }
+      return Promise.reject(error);
+    });
 }
 // export function SaveMail(email) {
 //   // const [user,setUser]=useState({});

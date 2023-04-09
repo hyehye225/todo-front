@@ -86,6 +86,10 @@ function App_f(props) {
     setShowProfile(true);
     // console.log(this.state.)
   };
+  const todo = () => {
+    setShowProfile(false);
+    // console.log(this.state.)
+  };
   const deleteEventHandler = () => {
     console.log("deleteEventHandler called");
     const thisItems = items;
@@ -163,7 +167,13 @@ function App_f(props) {
       <Toolbar>
         <Grid justifyContent="space-between" container>
           <Grid item>
-            <Typography variant="h6">오늘의 할일</Typography>
+            <Typography variant="h6" onClick={todo}>
+              {/* 오늘의 할일 */}
+              {/* <Button color="inherit" onClick={todo}>
+                {" "} */}
+              오늘의 할일
+              {/* </Button> */}
+            </Typography>
           </Grid>
           <Grid item>
             <Button color="inherit" onClick={profile}>
